@@ -1,7 +1,7 @@
 import React, {useState, useEffect, ChangeEventHandler} from "react";
 
 type Props = {
-    delay?: any;
+    debounceTime?: any;
     className?: string;
     style?: React.CSSProperties;
     type?: string;
@@ -37,17 +37,11 @@ function useDebounce(value:any,delay: number) {
 
 // input component to debounce the input pass out the debounced value, pass out the delay, pass out className, pass out style, pass out the placeholder, pass out the type, pass out the value, pass out the onChange
 
-function DebouncerInput({ delay, className, style, placeholder, type, value, onChange, name }: Props) {
-    const [debouncedValue, setDebouncedValue] = useState(value)
-    // use the useDebounce hook to get the debounced value
-    // const debouncedValue = useDebounce(value, delay);
-    // return the input element
-
-
+function DebouncerInput({ debounceTime, className, style, placeholder, type, value, onChange, name }: Props) {
 
     useEffect(()=>{
-        useDebounce(value, delay);
-    },[value, delay])
+        useDebounce(value, debounceTime);
+    },[value, debounceTime])
 
 
 
@@ -57,7 +51,7 @@ function DebouncerInput({ delay, className, style, placeholder, type, value, onC
             style={style}
             placeholder={placeholder}
             type={type}
-            value={debouncedValue}
+            value={value}
             name={name}
             onChange={onChange}
         />
