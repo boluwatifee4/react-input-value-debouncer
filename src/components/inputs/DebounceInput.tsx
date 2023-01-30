@@ -5,7 +5,7 @@ type Props = {
     className?: string;
     style?: React.CSSProperties;
     type?: string;
-    value?: string;
+    value?: any;
     name?: string;
     id?: string,
     label?: string,
