@@ -18,29 +18,36 @@ type Props = {
 
 };
 
-function useDebounce(value:any,delay: number) {
-    const [debouncedValue, setDebouncedValue] = useState(value)
+// function useDebounce(value:any,delay: number) {
+//     const [debouncedValue, setDebouncedValue] = useState(value)
 
-    useEffect(()=>{
+//     useEffect(()=>{
+//         const timeHandler = setTimeout(()=>{
+//             setDebouncedValue(value)
+//         }, delay);
+
+//         return () =>{
+//             clearTimeout(timeHandler);
+//         };
+
+//     },[value, delay])
+
+//     return debouncedValue
+// }
+
+// input component to debounce the input pass out the debounced value, pass out the delay, pass out className, pass out style, pass out the placeholder, pass out the type, pass out the value, pass out the onChange
+
+function DebouncerInput({ debounceTime, className, style, placeholder, type, value, onChange, name }: Props) {
+    const [debouncedValue, setDebouncedValue] = useState(value)
+     useEffect(()=>{
         const timeHandler = setTimeout(()=>{
             setDebouncedValue(value)
-        }, delay);
+        }, debounceTime);
 
         return () =>{
             clearTimeout(timeHandler);
         };
 
-    },[value, delay])
-
-    return debouncedValue
-}
-
-// input component to debounce the input pass out the debounced value, pass out the delay, pass out className, pass out style, pass out the placeholder, pass out the type, pass out the value, pass out the onChange
-
-function DebouncerInput({ debounceTime, className, style, placeholder, type, value, onChange, name }: Props) {
-
-    useEffect(()=>{
-        useDebounce(value, debounceTime);
     },[value, debounceTime])
 
 
@@ -51,7 +58,7 @@ function DebouncerInput({ debounceTime, className, style, placeholder, type, val
             style={style}
             placeholder={placeholder}
             type={type}
-            value={value}
+            value={debouncedValue}
             name={name}
             onChange={onChange}
         />

@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/boluwatifee4"
   },
-  "version": "0.1.3",
+  "version": "0.1.6",
   "description": "This is a react component library that debounces the input value",
   "scripts": {
     "rollup": "rollup -c"

@@ -2782,25 +2782,31 @@ if (process.env.NODE_ENV === 'production') {
 
 var React = react.exports;
 
-function useDebounce(value, delay) {
-    var _a = react.exports.useState(value), debouncedValue = _a[0], setDebouncedValue = _a[1];
-    react.exports.useEffect(function () {
-        var timeHandler = setTimeout(function () {
-            setDebouncedValue(value);
-        }, delay);
-        return function () {
-            clearTimeout(timeHandler);
-        };
-    }, [value, delay]);
-    return debouncedValue;
-}
+// function useDebounce(value:any,delay: number) {
+//     const [debouncedValue, setDebouncedValue] = useState(value)
+//     useEffect(()=>{
+//         const timeHandler = setTimeout(()=>{
+//             setDebouncedValue(value)
+//         }, delay);
+//         return () =>{
+//             clearTimeout(timeHandler);
+//         };
+//     },[value, delay])
+//     return debouncedValue
+// }
 // input component to debounce the input pass out the debounced value, pass out the delay, pass out className, pass out style, pass out the placeholder, pass out the type, pass out the value, pass out the onChange
 function DebouncerInput(_a) {
     var debounceTime = _a.debounceTime, className = _a.className, style = _a.style, placeholder = _a.placeholder, type = _a.type, value = _a.value, onChange = _a.onChange, name = _a.name;
+    var _b = react.exports.useState(value), debouncedValue = _b[0], setDebouncedValue = _b[1];
     react.exports.useEffect(function () {
-        useDebounce(value, debounceTime);
+        var timeHandler = setTimeout(function () {
+            setDebouncedValue(value);
+        }, debounceTime);
+        return function () {
+            clearTimeout(timeHandler);
+        };
     }, [value, debounceTime]);
-    return (React.createElement("input", { className: className, style: style, placeholder: placeholder, type: type, value: value, name: name, onChange: onChange }));
+    return (React.createElement("input", { className: className, style: style, placeholder: placeholder, type: type, value: debouncedValue, name: name, onChange: onChange }));
 }
 
 exports.DebouncerInput = DebouncerInput;
